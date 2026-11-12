@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Scratch Pad</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✏️</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="desk" class="tool-select">
+    <div id="world"></div>
+    <canvas id="ink"></canvas>
+  </div>
+
+  <header id="brand">
+    <span class="logo">Scratch<b>Pad</b></span>
+    <span class="tag">dump it. sketch it. say it.</span>
+  </header>
+
+  <div id="menu">
+    <button id="btn-png" title="Export as PNG">🖼️ PNG</button>
+    <button id="btn-export" title="Save board as a JSON file">💾 Save</button>
+    <button id="btn-import" title="Open a saved board">📂 Open</button>
+    <button id="btn-clear" title="Clear the whole board">🧹 Clear</button>
+    <input id="file-import" type="file" accept="application/json,.json" hidden>
+  </div>
+
+  <div id="empty">
+    <div class="big">A blank desk. Ooh.</div>
+    <div id="prompt" class="small"></div>
+    <div class="hint">Press <kbd>N</kbd> for a sticky · <kbd>P</kbd> to doodle · double-click anywhere</div>
+  </div>
+
+  <nav id="toolbar">
+    <div class="group" id="tools">
+      <button data-tool="select" title="Select / move (V)"><span>👆</span><i>V</i></button>
+      <button data-tool="note" title="Sticky note (N)"><span>🗒️</span><i>N</i></button>
+      <button data-tool="text" title="Free text (T)"><span>🔤</span><i>T</i></button>
+      <button data-tool="pen" title="Pen (P)"><span>✏️</span><i>P</i></button>
+      <button data-tool="eraser" title="Eraser (E)"><span>🩹</span><i>E</i></button>
+    </div>
+    <div class="sep"></div>
+    <div class="group" id="colors"></div>
+    <div class="sep"></div>
+    <div class="group">
+      <button id="btn-undo" title="Undo (Cmd/Ctrl+Z)"><span>↩️</span></button>
+      <button id="btn-redo" title="Redo (Shift+Cmd/Ctrl+Z)"><span>↪️</span></button>
+    </div>
+  </nav>
+
+  <div id="zoom" title="Click to reset zoom">100%</div>
+  <div id="toast"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
