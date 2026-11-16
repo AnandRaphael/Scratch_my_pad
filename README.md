@@ -20,6 +20,7 @@ No install, no build, no backend: just open it in a browser.
 | Pan | Drag the empty desk, hold `Space` and drag, or scroll |
 | Zoom | `Cmd/Ctrl` + scroll or pinch. Click the % badge to reset |
 | Undo / Redo | `Cmd/Ctrl+Z` / `Shift+Cmd/Ctrl+Z` |
+| Companion | Click **🧸 Buddy** or press `B` to summon a little bear. Press `B` again (or `Esc` when nothing is selected) to send it away |
 
 Boards autosave in your browser. Use **💾 Save** / **📂 Open** to move boards between browsers, and **🖼️ PNG** to share an image.
 
