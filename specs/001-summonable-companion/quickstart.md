@@ -25,6 +25,8 @@ A manual validation guide. It needs no install or build: open `index.html` in a 
 5. With the bear visible, make sure nothing is selected and the Select tool is active, then press `Esc`. **Expect**: the bear is dismissed.
 6. Select a sticky, press `Esc`. **Expect**: the sticky is deselected and the bear stays.
 7. Click inside a sticky to type and press `B`. **Expect**: the letter "b" is typed and the bear does not appear.
+8. Keyboard activation (FR-012): press `Tab` until `🧸 Buddy` is focused. **Expect**: a visible focus ring. Press `Enter`; the bear toggles. Press `Space`; it should toggle too. If `Space` does nothing, note it as a known pad-wide quirk (`app.js` captures `Space` for panning, and the other menu buttons behave the same) and do not change `app.js` in this feature.
+9. First-time user (SC-001): ask someone who has not seen the pad to summon the bear without instructions, and time them. **Expect**: under 5 seconds.
 
 ### 3. Wave, sit, blink (Story 3, FR-014, FR-015; SC-007)
 
@@ -40,6 +42,8 @@ With the bear visible, repeat each action, including with the pointer directly o
 - Pen: draw across the bear. Eraser: erase a stroke under it.
 - Select, move, and resize a sticky near it. Double-click to edit text.
 - Undo and redo.
+
+- Touch: with browser touch emulation (or a tablet), summon and dismiss with the button, then pan with one finger across the bear.
 
 **Expect**: every action behaves exactly as with the bear hidden. The bear stays fixed on screen while the board pans and zooms.
 
@@ -75,8 +79,16 @@ With the bear visible, repeat each action, including with the pointer directly o
 
 ### 10. Performance and background tabs (FR-016)
 
-1. With the bear seated, pan and zoom with a busy board. **Expect**: no visible slowdown compared with the bear hidden.
-2. Switch to another tab for a minute, then return. **Expect**: the bear resumes blinking without a burst of rapid blinks.
+1. Make a board of about 200 stickies. Run this in the DevTools console to download one, then load it with `📂 Open`:
+
+   ```js
+   const items = Array.from({length: 200}, (_, i) => ({ id: 't' + i, kind: 'note', x: (i % 20) * 200, y: Math.floor(i / 20) * 190, w: 180, h: 160, rot: 0, color: '#ffe66d', text: 'note ' + i }));
+   const blob = new Blob([JSON.stringify({ app: 'scratchpad', version: 1, state: { items, strokes: [] } })], { type: 'application/json' });
+   Object.assign(document.createElement('a'), { href: URL.createObjectURL(blob), download: 'busy-board.json' }).click();
+   ```
+
+2. In DevTools Performance, record 5 seconds of panning and zooming with the bear hidden, then again with the bear seated. **Expect**: no additional dropped frames and no new long tasks with the bear visible.
+3. Switch to another tab for a minute, then return. **Expect**: the bear resumes blinking without a burst of rapid blinks.
 
 ## Console checks
 

@@ -1,6 +1,6 @@
 # Feature Specification: Summonable Companion
 
-**Feature Branch**: `001-summonable-companion` (no branch created; work stays on `main`)
+**Feature Branch**: `001-summonable-companion`
 
 **Created**: 2026-11-16
 
@@ -57,7 +57,7 @@ A user summons the companion and meets a small, friendly teddy bear in the style
 1. **Given** the companion is hidden, **When** the user summons it, **Then** the bear appears and waves, then settles into a seated pose.
 2. **Given** the bear is seated, **When** the user watches it for 30 seconds, **Then** it blinks several times at uneven, natural-feeling intervals and never appears frozen.
 3. **Given** the companion is visible, **When** the user views it, **Then** its character design (brown bear, headphones, knit sweater, scarf) and warm hand-drawn style match the reference illustration, and any text it shows uses the pad's soft handwritten typography.
-4. **Given** the user has reduced-motion enabled in their system, **When** the companion appears, **Then** it skips the wave and shows the seated pose directly, with no looping movement.
+4. **Given** the user has reduced-motion enabled in their system, **When** the companion appears, **Then** it skips the wave and shows the seated pose directly, with no looping body or limb movement (blinking continues).
 5. **Given** the companion is dismissed, **When** the user summons it again, **Then** it waves and sits again from the start.
 
 ---
@@ -93,17 +93,17 @@ A user who never summons the companion, or who uses the pad offline or in a lock
 
 - **FR-001**: The companion MUST be hidden whenever the pad first opens, and MUST appear only after the user explicitly asks for it.
 - **FR-002**: Users MUST be able to summon the companion through a visible control and through a keyboard shortcut.
-- **FR-003**: Users MUST be able to dismiss the companion at any time, through a visible control and through the same keyboard shortcut or `Esc`.
+- **FR-003**: Users MUST be able to dismiss the companion at any time, through a visible control and through the same keyboard shortcut. `Esc` MUST also dismiss it, but only when nothing else needs `Esc` (no item is selected, the Select tool is active, and the user is not typing), so the pad's existing `Esc` behaviour is preserved.
 - **FR-004**: When dismissed, the companion MUST be fully hidden and MUST NOT take up space, capture input, or cover any part of the desk or toolbar.
 - **FR-005**: At most one companion MUST exist at a time, regardless of how often it is summoned or dismissed.
 - **FR-006**: While visible, the companion MUST remain at a fixed place on the screen during panning and zooming, and MUST NOT change the board's pan, zoom, or content.
 - **FR-007**: While visible, the companion MUST NOT block or alter any existing canvas action, including pan, zoom, draw, erase, select, move, resize, edit text, recolor, delete, and undo/redo.
 - **FR-008**: The companion MUST NOT appear in saved board files or exported images, and MUST NOT add entries to undo/redo history.
 - **FR-009**: The companion MUST be a teddy bear that follows the supplied reference illustration (`assets/character-reference.png`): brown bear, over-ear headphones, multicolor knit sweater, and scarf, drawn in a warm, hand-illustrated style. Any text it shows MUST use the pad's soft handwritten typography, and its colors MUST come from a warm palette consistent with the cozy style planned for the notebook.
-- **FR-010**: The companion MUST respect the user's reduced-motion preference: when it is set, the wave MUST be skipped and no looping movement MUST play.
+- **FR-010**: The companion MUST respect the user's reduced-motion preference: when it is set, the wave and the arrival slide MUST be skipped and no looping body or limb movement MUST play. Blinking is retained, because it is a small eye change and not movement across the screen.
 - **FR-014**: When summoned, the companion MUST wave once, then settle into a seated pose and stay seated until dismissed.
 - **FR-015**: While visible, the companion MUST blink at irregular, natural-feeling intervals (not at a fixed, mechanical rhythm) so it feels present, and the blinking MUST NOT stop while it is visible.
-- **FR-016**: The companion's animation MUST NOT noticeably slow the pad: pan, zoom, drawing, and typing MUST stay as responsive as with the companion hidden, and animation MUST pause while the browser tab is not visible.
+- **FR-016**: The companion's animation MUST NOT slow the pad: on a board of about 200 items, pan, zoom, drawing, and typing MUST feel and measure the same with the companion visible as with it hidden (no additional dropped frames in a performance recording), and animation MUST pause while the browser tab is not visible.
 - **FR-011**: The companion MUST work with no network connection and MUST NOT send any board or companion data off the device.
 - **FR-012**: The companion MUST be reachable by keyboard and have text or accessible labels for its controls, with a visible focus state.
 - **FR-013**: For the first release, the companion MUST be a purely decorative presence: it MUST NOT display prompts or messages, accept input, respond to board content, or provide any function beyond being visible. Its only behaviours are the wave, the seated pose, and blinking (FR-014, FR-015), subject to FR-010.

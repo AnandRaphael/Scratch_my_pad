@@ -1,6 +1,6 @@
 # Implementation Plan: Summonable Companion
 
-**Branch**: `001-summonable-companion` (spec folder name only; work stays on `main`) | **Date**: 2026-11-16 | **Spec**: [spec.md](spec.md)
+**Branch**: `001-summonable-companion` | **Date**: 2026-11-16 | **Spec**: [spec.md](spec.md)
 
 **Input**: Feature specification from `/specs/001-summonable-companion/spec.md`
 
