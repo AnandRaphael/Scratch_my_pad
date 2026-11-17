@@ -1,4 +1,8 @@
 .DS_Store
 node_modules/
 *.log
-.claude/
+.claude/*
+!.claude/skills/
+
+# Local-only ideas backlog
+IDEAS.md

@@ -16,6 +16,8 @@
     <canvas id="ink"></canvas>
   </div>
 
+  <div id="companion" hidden aria-hidden="true"></div>
+
   <header id="brand">
     <span class="logo">Scratch<b>Pad</b></span>
     <span class="tag">dump it. sketch it. say it.</span>
@@ -25,6 +27,7 @@
     <button id="btn-png" title="Export as PNG">🖼️ PNG</button>
     <button id="btn-export" title="Save board as a JSON file">💾 Save</button>
     <button id="btn-import" title="Open a saved board">📂 Open</button>
+    <button id="btn-companion" aria-pressed="false" title="Summon the companion (B)">🧸 Buddy</button>
     <button id="btn-clear" title="Clear the whole board">🧹 Clear</button>
     <input id="file-import" type="file" accept="application/json,.json" hidden>
   </div>
@@ -56,5 +59,6 @@
   <div id="toast"></div>
 
   <script src="app.js"></script>
+  <script src="companion.js"></script>
 </body>
 </html>

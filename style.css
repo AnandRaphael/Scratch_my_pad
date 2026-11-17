@@ -114,3 +114,90 @@ kbd { font-family: inherit; border: 2px solid var(--ink); border-radius: 6px; pa
   padding: 8px 20px; border-radius: 30px; opacity: 0; pointer-events: none; transition: all .35s cubic-bezier(.3, 1.6, .5, 1);
 }
 #toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+/* ---------- companion ---------- */
+/* The bear palette lives on #companion so nothing outside it can pick the variables up. */
+#companion {
+  --bear-fur: #a8683a;
+  --bear-fur-dark: #8a5129;
+  --bear-muzzle: #e0b98a;
+  --bear-outline: #3a2a22;
+  --bear-blush: #e98a74;
+  --bear-rust: #c0552f;
+  --bear-mustard: #e0a93b;
+  --bear-teal: #4f9a8c;
+  --bear-cream: #f1e3c8;
+}
+
+/* Never takes input: every pointer event reaches the desk underneath. */
+#companion { position: fixed; left: 20px; bottom: 20px; width: 150px; }
+#companion, #companion * { pointer-events: none; user-select: none; }
+#companion[hidden] { display: none; }
+
+/* Arrival and leaving use only opacity and transform, so they cannot slow the canvas. */
+#companion { opacity: 0; transform: translateY(16px); transition: opacity .5s ease, transform .5s cubic-bezier(.3, 1.4, .5, 1); }
+#companion.is-arriving, #companion.is-waving, #companion.is-seated { opacity: 1; transform: none; }
+#companion.is-leaving { opacity: 0; transform: translateY(8px); transition-duration: .3s; }
+
+#btn-companion:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+
+/* ---- the bear: colours ---- */
+#companion svg { width: 100%; height: auto; display: block; overflow: visible; }
+#companion svg * { stroke-linejoin: round; stroke-linecap: round; }
+
+#companion .ear, #companion .head, #companion .foot, #companion .paw { fill: var(--bear-fur); stroke: var(--bear-outline); stroke-width: 2.5; }
+#companion .ear-inner, #companion .pad { fill: var(--bear-muzzle); }
+#companion .muzzle { fill: var(--bear-muzzle); }
+#companion .cheek { fill: var(--bear-blush); opacity: .45; }
+#companion .nose { fill: var(--bear-outline); }
+#companion .mouth { fill: none; stroke: var(--bear-outline); stroke-width: 2.5; }
+#companion .bear-eyes circle { fill: var(--bear-outline); }
+#companion .bear-eyes .glint { fill: #fff; }
+#companion .bear-eyelids ellipse { fill: var(--bear-fur); }
+#companion .lash { fill: none; stroke: var(--bear-outline); stroke-width: 2.2; }
+
+#companion .sweater-base { fill: var(--bear-mustard); }
+#companion .sweater-rust { fill: var(--bear-rust); }
+#companion .sweater-teal { fill: var(--bear-teal); }
+#companion .sweater-cable { fill: none; stroke: var(--bear-cream); stroke-width: 3; opacity: .45; }
+#companion .sweater-outline { fill: none; stroke: var(--bear-outline); stroke-width: 2.5; }
+#companion .scarf-band { fill: var(--bear-rust); stroke: var(--bear-outline); stroke-width: 2.5; }
+#companion .knit { fill: none; stroke: rgba(0, 0, 0, .2); stroke-width: 2.5; }
+
+#companion .sleeve-outline { fill: none; stroke: var(--bear-outline); stroke-width: 28; }
+#companion .sleeve { fill: none; stroke: var(--bear-teal); stroke-width: 23; }
+
+#companion .hp-band { fill: none; stroke: var(--bear-rust); stroke-width: 8; }
+#companion .hp-cup { fill: var(--bear-cream); stroke: var(--bear-outline); stroke-width: 2.5; }
+#companion .hp-pad { fill: var(--bear-rust); }
+
+/* ---- the wave: the raised arm only exists while waving ---- */
+@keyframes bear-wave {
+  0%   { transform: rotate(110deg); }
+  12%  { transform: rotate(14deg); }
+  26%  { transform: rotate(-8deg); }
+  40%  { transform: rotate(16deg); }
+  54%  { transform: rotate(-8deg); }
+  68%  { transform: rotate(14deg); }
+  82%  { transform: rotate(6deg); }
+  100% { transform: rotate(110deg); }
+}
+#companion .bear-arm-wave { visibility: hidden; transform-origin: 138px 138px; }
+#companion.is-waving .bear-arm-wave { visibility: visible; animation: bear-wave 2.4s ease-in-out 1 both; }
+#companion.is-waving .bear-arm-rest { visibility: hidden; }
+
+/* ---- the blink: the lids close from the top and open again ---- */
+#companion .bear-eyelids { transform-box: fill-box; transform-origin: 50% 0; transform: scaleY(0); transition: transform .06s ease-in; }
+#companion.is-blinking .bear-eyelids { transform: scaleY(1); }
+
+/* ---- reduced motion: fade in without sliding or waving; blinking stays (it is a tiny eye change) ---- */
+@media (prefers-reduced-motion: reduce) {
+  #companion { transform: none; transition: opacity .2s linear; }
+  #companion.is-leaving { transform: none; }
+  #companion .bear-arm-wave { animation: none; visibility: hidden; }
+}
+
+/* Narrow windows: shrink and sit above the toolbar row so the bear never covers a control. */
+@media (max-width: 900px) {
+  #companion { width: 100px; bottom: 108px; left: 12px; }
+}
